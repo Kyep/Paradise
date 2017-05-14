@@ -20,3 +20,5 @@ run_update:
     name: test 
   only: 
     - master 
+  variables:
+    GIT_STRATEGY: "none"
