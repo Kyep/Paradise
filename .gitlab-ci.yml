@@ -4,8 +4,8 @@ stages:
 run_update: 
   stage: deploy 
   script:
-    - cd "c:\users\byond\desktop\paradise-server\"
-    - call "c:\users\byond\desktop\paradise-server\Update Server.bat"
-    - taskkill /f /im dreamdaemon.exe
+    - echo "Deploy to staging location"
+  environment:
+    name: test 
   only: 
     - master 
