@@ -1085,6 +1085,16 @@ var/list/uplink_items = list()
 	item = /obj/item/device/radio/beacon/syndicate/bomb
 	cost = 11
 
+/datum/uplink_item/device_tools/psiemitter
+	name = "PSI Emitter"
+	desc = "Lures terrifying monsters to the station. Requires a screwdriver, and a few minutes to charge. Ordering this sends you a small beacon, which teleports the emitter to you when activated."
+	reference = "PSI"
+	item = /obj/item/device/radio/beacon/syndicate/terrorspider
+	cost = 18
+	surplus = 0
+	hijack_only = 1
+	excludefrom = list(/datum/game_mode/nuclear)
+
 /datum/uplink_item/device_tools/syndicate_detonator
 	name = "Syndicate Detonator"
 	desc = "The Syndicate Detonator is a companion device to the Syndicate Bomb. Simply press the included button and an encrypted radio frequency will instruct all live syndicate bombs to detonate. \
