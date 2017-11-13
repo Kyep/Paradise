@@ -275,7 +275,7 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 	var/blood = 0
 	var/old_bloodtotal = 0 //used to see if we increased our blood total
 	var/old_bloodusable = 0 //used to see if we increased our blood usable
-	var/muzzle = H.is_muzzled()
+	var/muzzle = owner.is_muzzled()
 	if(muzzle)
 		to_chat(owner, "<span class='warning'>[muzzle] prevents you from biting [H]!</span>")
 		return
