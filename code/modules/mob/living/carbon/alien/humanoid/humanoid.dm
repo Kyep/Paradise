@@ -13,6 +13,7 @@
 	var/leap_on_click = 0
 	var/custom_pixel_x_offset = 0 //for admin fuckery.
 	var/custom_pixel_y_offset = 0
+	pass_flags = PASSTABLE
 	pressure_resistance = 100    //100 kPa difference required to push
 
 //This is fine right now, if we're adding organ specific damage this needs to be updated
@@ -122,7 +123,7 @@
 					stuttering = power
 				Stun(power)
 
-				var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
 
