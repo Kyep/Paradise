@@ -297,6 +297,7 @@
 	var/eye_colour = "#000000"
 	var/list/colourmatrix = null
 	var/list/colourblind_matrix = MATRIX_GREYSCALE //Special colourblindness parameters. By default, it's black-and-white.
+	var/list/replace_colours = LIST_GREYSCALE_REPLACE
 	var/colourblind_darkview = null
 	var/dependent_disabilities = null //Gets set by eye-dependent disabilities such as colourblindness so the eyes can transfer the disability during transplantation.
 	var/dark_view = 2 //Default dark_view for Humans.

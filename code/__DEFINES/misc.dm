@@ -278,6 +278,15 @@
                                0.4,0.6,0.0,\
                                0.2,0.2,0.6)
 
+#define LIST_GREYSCALE_REPLACE list("red" = "lightgrey", "blue" = "darkgrey", "green" = "darkgrey", "orange" = "lightgrey", "brown" = "darkgrey",\
+									"gold" = "lightgrey", "cyan" = "lightgrey", "navy" = "darkgrey", "purple" = "darkgrey", "pink"= "lightgrey")
+
+#define LIST_VULP_REPLACE list("red" = "goldenrod", "green" = "goldenrod", "orange" = "peru", "purple" = "skyblue", "pink" = "skyblue",\
+							   "cyan" = "skyblue")
+
+#define LIST_TAJ_REPLACE list("red" = "goldenrod", "green" = "goldenrod", "orange" = "peru", "purple" = "skyblue", "pink" = "skyblue",\
+							   "cyan" = "skyblue")
+
 
 //Gun trigger guards
 #define TRIGGER_GUARD_ALLOW_ALL -1
