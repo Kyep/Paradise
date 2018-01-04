@@ -106,7 +106,6 @@
 	dat += "<A href='?src=[UID()];action=pump'>Shotgun Pump</A>"
 	dat += "<A href='?src=[UID()];action=pop'>Gunshot</A>"
 	dat += "<A href='?src=[UID()];action=saber'>Esword</A>"
-	dat += "<A href='?src=[UID()];action=harm'>Harm Alarm</A>"
 	var/datum/browser/popup = new(user, "vending", "Radiance Dance Machine - Mark IV", 400, 350)
 	popup.set_content(dat.Join())
 	popup.open()
@@ -161,8 +160,6 @@
 			deejay('sound/weapons/gunshot3.ogg')
 		if("saber")
 			deejay('sound/weapons/saberon.ogg')
-		if("harm")
-			deejay('sound/ai/harmalarm.ogg')
 
 /obj/machinery/disco/proc/deejay(S)
 	if(qdeleted(src) || !active || charge < 5)
