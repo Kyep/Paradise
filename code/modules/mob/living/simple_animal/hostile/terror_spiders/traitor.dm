@@ -75,10 +75,10 @@
 				vents += temp_vent
 	while((spawncount >= 1) && vents.len)
 		var/obj/vent = pick(vents)
-		var/obj/effect/spider/spiderling/S = new(vent.loc)
+		var/obj/structure/spider/spiderling/terror_spiderling/S = new(vent.loc)
 		S.name = "evil-looking spiderling"
 		S.grow_as = /mob/living/simple_animal/hostile/poison/terror_spider/white
 		S.amount_grown = 50 // double-speed growth
 		notify_ghosts("[src] has detonated in [get_area(src)], drawing a white terror spiderling to [get_area(S)]")
 		vents -= vent
-spawncount--
+		spawncount--
