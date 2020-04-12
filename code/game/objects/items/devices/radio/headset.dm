@@ -241,6 +241,13 @@
 	desc = "Headset used by shaft miners."
 	icon_state = "mine_headset"
 
+/obj/item/radio/headset/heads/qm
+	name = "QM's headset"
+	desc = "The rarest of headsets. The field-promotion headset."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/encryptionkey/heads/qm
+
 /obj/item/radio/headset/headset_service
 	name = "service radio headset"
 	desc = "Headset used by the service staff, tasked with keeping the station full, happy and clean."

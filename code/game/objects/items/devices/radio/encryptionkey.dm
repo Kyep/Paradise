@@ -115,6 +115,11 @@
 	icon_state = "hop_cypherkey"
 	channels = list("Supply" = 1, "Service" = 1, "Security" = 0, "Command" = 1)
 
+/obj/item/encryptionkey/heads/qm
+	name = "QM's Encryption Key"
+	icon_state = "hop_cypherkey"
+	channels = list("Supply" = 1, "Command" = 1)
+
 /obj/item/encryptionkey/heads/ntrep
 	name = "Nanotrasen Representative's Encryption Key"
 	icon_state = "com_cypherkey"

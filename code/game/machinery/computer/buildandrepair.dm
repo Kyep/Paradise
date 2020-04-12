@@ -148,6 +148,10 @@
 	name = "Circuit board (Engineering ID Computer)"
 	build_path = /obj/machinery/computer/card/minor/ce
 	target_dept = TARGET_DEPT_ENG
+/obj/item/circuitboard/card/minor/qm
+	name = "Circuit board (QM ID Computer)"
+	build_path = /obj/machinery/computer/card/minor/qm
+	target_dept = TARGET_DEPT_CARGO
 /obj/item/circuitboard/card/centcom
 	name = "Circuit board (CentComm ID Computer)"
 	build_path = /obj/machinery/computer/card/centcom
