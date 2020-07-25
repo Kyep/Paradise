@@ -435,6 +435,7 @@
 	data["science_jobs"] = format_jobs(GLOB.science_positions, data["target_rank"], job_formats)
 	data["security_jobs"] = format_jobs(GLOB.security_positions, data["target_rank"], job_formats)
 	data["support_jobs"] = format_jobs(GLOB.support_positions, data["target_rank"], job_formats)
+	data["supply_jobs"] = format_jobs(GLOB.supply_positions, data["target_rank"], job_formats)
 	data["civilian_jobs"] = format_jobs(GLOB.civilian_positions, data["target_rank"], job_formats)
 	data["special_jobs"] = format_jobs(GLOB.whitelisted_positions, data["target_rank"], job_formats)
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs(), data["target_rank"], job_formats)

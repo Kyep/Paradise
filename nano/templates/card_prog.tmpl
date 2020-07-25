@@ -244,6 +244,14 @@
                 </td>
               </tr>
               <tr>
+                <th style="color: '#A0A0A0';">Supply</th>
+                <td>
+                  {{for data.supply_jobs}}
+                    {{:helper.link(value.display_name, '', {'action' : 'PRG_assign', 'assign_target' : value.job}, value.jlinkformat == 'disabled' ? 'disabled' : null, value.jlinkformat ? value.jlinkformat : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>
                 <th style="color: '#808080';">Civilian</th>
                 <td>
                   {{for data.civilian_jobs}}
