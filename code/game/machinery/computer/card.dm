@@ -776,7 +776,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 /obj/machinery/computer/card/minor/qm
 	name = "supply management console"
 	target_dept = TARGET_DEPT_CARGO
-	icon_screen = "idce"
+	icon_screen = "idqm"
 	light_color = LIGHT_COLOR_RED
 	req_access = list(ACCESS_QM)
 	circuit = /obj/item/circuitboard/card/minor/qm
