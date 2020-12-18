@@ -92,6 +92,8 @@
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE)
 	minimal_access = list(ACCESS_HYDROPONICS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS)
 	alt_titles = list("Hydroponicist", "Botanical Researcher")
+	exp_requirements = 1200
+	exp_type = EXP_TYPE_SUPPLY
 	outfit = /datum/outfit/job/hydro
 
 /datum/outfit/job/hydro
