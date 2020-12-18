@@ -59687,6 +59687,9 @@
 	dir = 8
 	},
 /obj/structure/snow,
+/obj/machinery/keycard_auth{
+	pixel_x = 23
+	},
 /turf/simulated/floor/plasteel,
 /area/quartermaster/qm)
 "cdF" = (
@@ -62478,9 +62481,8 @@
 /turf/simulated/floor/plasteel,
 /area/quartermaster/qm)
 "cix" = (
-/obj/structure/table,
-/obj/item/coin/silver,
 /obj/structure/snow,
+/obj/machinery/computer/card/minor/qm,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/qm)
 "ciy" = (
@@ -62511,6 +62513,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/snow,
+/obj/item/coin/silver,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/qm)
 "ciA" = (
