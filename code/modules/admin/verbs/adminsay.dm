@@ -7,11 +7,19 @@
 	msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
 	if(!msg)	return
 
+	var/datum/asays/asay = new(usr.ckey, usr.client.holder.rank, msg, world.timeofday)
+	GLOB.asays += asay
 	log_adminsay(msg, src)
 
 	if(check_rights(R_ADMIN,0))
 		for(var/client/C in GLOB.admins)
 			if(R_ADMIN & C.holder.rights)
+				// Lets see if this admin was pinged in the asay message
+				if(findtext(msg, "@[C.ckey]") || findtext(msg, "@[C.key]")) // Check ckey and key, so you can type @AffectedArc07 or @affectedarc07
+					SEND_SOUND(C, 'sound/misc/ping.ogg')
+					msg = replacetext(msg, "@[C.ckey]", "<font color='red'>@[C.ckey]</font>")
+					msg = replacetext(msg, "@[C.key]", "<font color='red'>@[C.key]</font>") // Same applies here. key and ckey.
+
 				msg = "<span class='emoji_enabled'>[msg]</span>"
 				to_chat(C, "<span class='admin_channel'>ADMIN: <span class='name'>[key_name(usr, 1)]</span> ([admin_jump_link(mob)]): <span class='message'>[msg]</span></span>")
 

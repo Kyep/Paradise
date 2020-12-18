@@ -66,9 +66,7 @@
 		if(!is_station_level(T.z))
 			return
 		var/area/A = get_area(src)
-		if(cryo_ssd(src))
-			var/obj/effect/portal/P = new /obj/effect/portal(T, null, null, 40)
-			P.name = "NT SSD Teleportation Portal"
+		cryo_ssd(src)
 		if(A.fast_despawn)
 			force_cryo_human(src)
 
@@ -302,14 +300,6 @@
 				if(!(head && head.flags & AIRTIGHT)) //if NOT (head AND head.flags CONTAIN AIRTIGHT)
 					null_internals = 1 //not wearing a mask or suitable helmet
 
-		if(istype(back, /obj/item/rig)) //wearing a rigsuit
-			var/obj/item/rig/rig = back //needs to be typecasted because this doesn't use get_rig() for some reason
-			if(rig.offline && (rig.air_supply && internal == rig.air_supply)) //if rig IS offline AND (rig HAS air_supply AND internal IS air_supply)
-				null_internals = 1 //offline suits do not breath
-
-			else if(rig.air_supply && internal == rig.air_supply) //if rig HAS air_supply AND internal IS rig air_supply
-				skip_contents_check = 1 //skip contents.Find() check, the oxygen is valid even being outside of the mob
-
 		if(!contents.Find(internal) && (!skip_contents_check)) //if internal NOT IN contents AND skip_contents_check IS false
 			null_internals = 1 //not a rigsuit and your oxygen is gone
 
@@ -417,19 +407,19 @@
 
 ///FIRE CODE
 /mob/living/carbon/human/handle_fire()
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	if(HEATRES in mutations)
 		return
-	if(on_fire)
-		var/thermal_protection = get_thermal_protection()
+	var/thermal_protection = get_thermal_protection()
 
-		if(thermal_protection >= FIRE_IMMUNITY_MAX_TEMP_PROTECT)
-			return
-		if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
-			bodytemperature += 11
-		else
-			bodytemperature += (BODYTEMP_HEATING_MAX + (fire_stacks * 12))
+	if(thermal_protection >= FIRE_IMMUNITY_MAX_TEMP_PROTECT)
+		return
+	if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
+		bodytemperature += 11
+	else
+		bodytemperature += (BODYTEMP_HEATING_MAX + (fire_stacks * 12))
 
 /mob/living/carbon/human/proc/get_thermal_protection()
 	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures
@@ -607,7 +597,7 @@
 			if(overeatduration < 100)
 				becomeSlim()
 		else
-			if(overeatduration > 500)
+			if(overeatduration > 500 && !(NO_OBESITY in dna.species.species_traits))
 				becomeFat()
 
 		// nutrition decrease
@@ -706,13 +696,14 @@
 
 	if(alcohol_strength >= slur_start) //slurring
 		Slur(drunk)
-	if(alcohol_strength >= brawl_start) //the drunken martial art
-		if(!istype(martial_art, /datum/martial_art/drunk_brawling))
-			var/datum/martial_art/drunk_brawling/F = new
-			F.teach(src, 1)
-	if(alcohol_strength < brawl_start) //removing the art
-		if(istype(martial_art, /datum/martial_art/drunk_brawling))
-			martial_art.remove(src)
+	if(mind)
+		if(alcohol_strength >= brawl_start) //the drunken martial art
+			if(!istype(mind.martial_art, /datum/martial_art/drunk_brawling))
+				var/datum/martial_art/drunk_brawling/F = new
+				F.teach(src, TRUE)
+		else if(alcohol_strength < brawl_start) //removing the art
+			if(istype(mind.martial_art, /datum/martial_art/drunk_brawling))
+				mind.martial_art.remove(src)
 	if(alcohol_strength >= confused_start && prob(33)) //confused walking
 		if(!confused)
 			Confused(1)

@@ -113,7 +113,7 @@
 			var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].", I.armour_penetration)
 			apply_damage(I.throwforce, dtype, zone, armor, is_sharp(I), I)
 			if(I.thrownby)
-				add_attack_logs(I.thrownby, src, "Hit with thrown [I]")
+				add_attack_logs(I.thrownby, src, "Hit with thrown [I]", !I.throwforce ? ATKLOG_ALMOSTALL : null) // Only message if the person gets damages
 		else
 			return 1
 	else
@@ -179,22 +179,28 @@
 	if(on_fire && fire_stacks <= 0)
 		ExtinguishMob()
 
+/**
+ * Burns a mob and slowly puts the fires out. Returns TRUE if the mob is on fire
+ */
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
 		fire_stacks = min(0, fire_stacks + 1)//So we dry ourselves back to default, nonflammable.
 	if(!on_fire)
-		return 1
+		return FALSE
 	if(fire_stacks > 0)
 		adjust_fire_stacks(-0.1) //the fire is slowly consumed
+		for(var/obj/item/clothing/C in contents)
+			C.catch_fire()
 	else
 		ExtinguishMob()
-		return
+		return FALSE
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.oxygen < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
-		return
+		return FALSE
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(700, 50, 1)
+	return TRUE
 
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume, global_overlay = TRUE)
 	..()
@@ -219,7 +225,7 @@
 		fire_stacks += L.fire_stacks
 		IgniteMob()
 
-/mob/living/can_be_pulled(user, grab_state, force)
+/mob/living/can_be_pulled(user, grab_state, force, show_message = FALSE)
 	return ..() && !(buckled && buckled.buckle_prevents_pull)
 
 /mob/living/water_act(volume, temperature, source, method = REAGENT_TOUCH)
@@ -355,3 +361,6 @@
 		if(INTENT_DISARM)
 			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			return TRUE
+
+/mob/living/proc/cult_self_harm(damage)
+	return FALSE

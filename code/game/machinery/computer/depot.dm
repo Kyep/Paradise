@@ -13,6 +13,7 @@
 	icon_screen = "tcboss"
 	light_color = LIGHT_COLOR_PURE_CYAN
 	req_access = list(ACCESS_SYNDICATE)
+	bubble_icon = "syndibot"
 	var/security_lockout = FALSE
 	var/sound_yes = 'sound/machines/twobeep.ogg'
 	var/sound_no = 'sound/machines/buzz-sigh.ogg'
@@ -22,9 +23,9 @@
 	var/has_alerted = FALSE
 
 
-/obj/machinery/computer/syndicate_depot/New()
+/obj/machinery/computer/syndicate_depot/Initialize(mapload)
 	. = ..()
-	depotarea = areaMaster
+	depotarea = get_area(src)
 
 /obj/machinery/computer/syndicate_depot/attack_ai(mob/user)
 	if(req_access.len && !("syndicate" in user.faction))
@@ -165,7 +166,7 @@
 	alerts_when_broken = TRUE
 
 /obj/machinery/computer/syndicate_depot/selfdestruct/get_menu(mob/user)
-	var menutext = {"<B>Syndicate Depot Fusion Reactor Control</B><HR>
+	var/menutext = {"<B>Syndicate Depot Fusion Reactor Control</B><HR>
 	<BR><BR><a href='?src=[UID()];primary=1'>Disable Containment Field</a>
 	<BR>"}
 	return menutext
@@ -190,13 +191,9 @@
 	alerts_when_broken = TRUE
 	var/area/syndicate_depot/perimeter/perimeterarea
 
-/obj/machinery/computer/syndicate_depot/shieldcontrol/New()
+/obj/machinery/computer/syndicate_depot/shieldcontrol/Initialize(mapload)
 	. = ..()
 	perimeterarea = locate(/area/syndicate_depot/perimeter)
-	if(istype(perimeterarea) && (GAMEMODE_IS_NUCLEAR || prob(20)))
-		spawn(200)
-			perimeterarea.perimeter_shields_up()
-			depotarea.perimeter_shield_status = TRUE
 
 /obj/machinery/computer/syndicate_depot/shieldcontrol/Destroy()
 	if(istype(perimeterarea) && perimeterarea.shield_list.len)
@@ -204,7 +201,7 @@
 	return ..()
 
 /obj/machinery/computer/syndicate_depot/shieldcontrol/get_menu(mob/user)
-	var menutext = {"<B>Syndicate Depot Shield Grid Control</B><HR>
+	var/menutext = {"<B>Syndicate Depot Shield Grid Control</B><HR>
 	<BR>"}
 	menutext += {"(SYNDI-LEADER) Whole-base Shield: [perimeterarea.shield_list.len ? "ON" : "OFF"] (<a href='?src=[UID()];primary=1'>[perimeterarea.shield_list.len ? "Disable" : "Enable"]</a>)<BR>"}
 	menutext += {"(SYNDI-LEADER) Armory Shield: [depotarea.shield_list.len ? "ON" : "OFF"] (<a href='?src=[UID()];secondary=1'>[depotarea.shield_list.len ? "Disable" : "Enable"]</a>)<BR>"}
@@ -248,7 +245,7 @@
 	alerts_when_broken = TRUE
 	var/message_sent = FALSE
 
-/obj/machinery/computer/syndicate_depot/syndiecomms/New()
+/obj/machinery/computer/syndicate_depot/syndiecomms/Initialize(mapload)
 	. = ..()
 	if(depotarea)
 		depotarea.comms_computer = src
@@ -364,11 +361,13 @@
 	var/portal_enabled = FALSE
 	var/portaldir = WEST
 
-/obj/machinery/computer/syndicate_depot/teleporter/New()
-	. = ..()
-	spawn(10)
-		findbeacon()
-		update_portal()
+/obj/machinery/computer/syndicate_depot/teleporter/Initialize(mapload)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/syndicate_depot/teleporter/LateInitialize()
+	findbeacon()
+	update_portal()
 
 /obj/machinery/computer/syndicate_depot/teleporter/Destroy()
 	if(mybeacon)
