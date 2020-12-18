@@ -248,7 +248,7 @@
 
 /obj/item/radio/headset/heads/qm
 	name = "QM's headset"
-	desc = "The rarest of headsets. The field-promotion headset."
+	desc = "A headset used by the QM."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/encryptionkey/heads/qm

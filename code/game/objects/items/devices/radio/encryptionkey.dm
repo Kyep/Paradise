@@ -120,11 +120,6 @@
 	icon_state = "hop_cypherkey"
 	channels = list("Supply" = 1, "Service" = 1, "Security" = 0, "Command" = 1)
 
-/obj/item/encryptionkey/heads/qm
-	name = "QM's Encryption Key"
-	icon_state = "hop_cypherkey"
-	channels = list("Supply" = 1, "Command" = 1)
-
 /obj/item/encryptionkey/heads/ntrep
 	name = "Nanotrasen Representative's Encryption Key"
 	icon_state = "com_cypherkey"
@@ -144,13 +139,15 @@
 /obj/item/encryptionkey/headset_mine
 	name = "Mining Radio Encryption Key"
 	icon_state = "mine_cypherkey"
-	channels = list("Mining" = 1)
+	channels = list("Supply" = 1)
+*/
 
 /obj/item/encryptionkey/heads/qm
 	name = "Quartermaster's Encryption Key"
 	icon_state = "qm_cypherkey"
-	channels = list("Cargo" = 1, "Mining" = 1)
-*/
+	channels = list("Supply" = 1, "Command" = 1)
+
+
 /obj/item/encryptionkey/headset_cargo
 	name = "Supply Radio Encryption Key"
 	icon_state = "cargo_cypherkey"
